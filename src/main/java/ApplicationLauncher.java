@@ -11,6 +11,9 @@ public class ApplicationLauncher {
   private static final String BASE_URL = "http://aerial-valor-93012.appspot.com";
   private static final String GET_CHALLENGE_URL = BASE_URL + "/challenge";
   private static final String GET_ANSWER_URL = GET_CHALLENGE_URL + "/%s/%s";
+  private static final String TOKEN = "token";
+  private static final String VALUES = "values";
+  private static final String ANSWER = "answer";
 
   private ObjectMapper mapper = new ObjectMapper();
 
@@ -22,8 +25,8 @@ public class ApplicationLauncher {
 
     try {
       JsonNode challengeResponse = sendGetRequestToChallengePath();
-      String token = challengeResponse.get("token").asText();
-      JsonNode values = challengeResponse.get("values");
+      String token = challengeResponse.get(TOKEN).asText();
+      JsonNode values = challengeResponse.get(VALUES);
       int sumOfValues = getSumOfValues(values);
 
       String answer = getAnswer(token, sumOfValues);
@@ -52,7 +55,7 @@ public class ApplicationLauncher {
     String getAnswerUrl = String.format(GET_ANSWER_URL, token, sumOfValues);
     Content content = Request.Get(getAnswerUrl).execute().returnContent();
     JsonNode responseAsJsonNode = mapper.readTree(content.toString());
-    return responseAsJsonNode.get("answer").asText();
+    return responseAsJsonNode.get(ANSWER).asText();
   }
 
 }
