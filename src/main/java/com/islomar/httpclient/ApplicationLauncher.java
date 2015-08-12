@@ -32,7 +32,7 @@ public class ApplicationLauncher {
       int sumOfValues = getSumOfValues(values);
 
       String answer = getAnswer(token, sumOfValues);
-      System.out.printf("Answer: %s", answer);
+      System.out.printf("Answer: %s\n", answer);
     } catch (IOException e) {
       e.printStackTrace();
     }
