@@ -1,3 +1,5 @@
+package com.islomar.httpclient;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -39,7 +41,6 @@ public class ApplicationLauncher {
 
   private JsonNode sendGetRequestToChallengePath() throws IOException {
     Content content = Request.Get(GET_CHALLENGE_URL).execute().returnContent();
-
     return mapper.readTree(content.toString());
   }
 
